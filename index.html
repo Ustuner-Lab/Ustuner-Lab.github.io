@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ustuner Lab — Advanced Materials for Energy Systems Laboratory." />
+  <title>Ustuner Lab — Advanced Materials for Energy Systems</title>
+  <style>
+    :root {
+      --ink: #3d3041;
+      --ink-soft: #706272;
+      --navy: #4b3550;
+      --teal: #d95f7f;
+      --teal-deep: #a64264;
+      --seafoam: #f8dbe5;
+      --warm: #fbf5f7;
+      --paper: #fffaf8;
+      --copper: #ec775f;
+      --line: rgba(70, 47, 73, .13);
+      --shadow: 0 18px 60px rgba(115, 65, 98, .13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .site-header {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: var(--ink);
+    }
+    .nav {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(67,46,70,.14);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-weight: 650;
+      letter-spacing: -.01em;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(78,50,79,.34);
+      border-radius: 50%;
+    }
+    .brand small {
+      display: block;
+      margin-top: -3px;
+      color: rgba(61,48,65,.62);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; align-items: center; gap: 30px; font-size: 14px; }
+    .nav-links a { color: rgba(61,48,65,.72); transition: .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      padding: 10px 17px;
+      border: 1px solid rgba(74,48,75,.28);
+      border-radius: 999px;
+      color: var(--ink) !important;
+    }
+
+    .hero {
+      min-height: 760px;
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 83% 30%, rgba(237, 111, 146, .28), transparent 29%),
+        radial-gradient(circle at 72% 77%, rgba(152, 130, 196, .22), transparent 30%),
+        radial-gradient(circle at 19% 86%, rgba(246, 163, 122, .18), transparent 25%),
+        linear-gradient(128deg, #fffaf6 0%, #fbe7ed 54%, #f2e6f6 100%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2359687c' stroke-opacity='.25'%3E%3Ccircle cx='14' cy='32' r='2' fill='%23b89c76'/%3E%3Ccircle cx='90' cy='20' r='1.5' fill='%23b89c76'/%3E%3Ccircle cx='124' cy='92' r='2' fill='%23b89c76'/%3E%3Ccircle cx='48' cy='126' r='1.5' fill='%23b89c76'/%3E%3Cpath d='M14 32L90 20M90 20l34 72M124 92l-76 34M48 126L14 32'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: 76px;
+      padding-top: 104px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 22px;
+      color: #b14568;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 35px; height: 1px; background: currentColor; }
+    h1 {
+      margin: 0;
+      max-width: 680px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(50px, 6vw, 82px);
+      font-weight: 400;
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    .hero-copy p {
+      max-width: 600px;
+      margin: 28px 0 34px;
+      color: rgba(61,48,65,.72);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: #d95f7f; color: white; box-shadow: 0 10px 28px rgba(193,69,105,.22); }
+    .button-secondary { border: 1px solid rgba(78,50,79,.24); color: var(--ink); background: rgba(255,255,255,.3); }
+    .arrow { font-size: 17px; }
+
+    .nano-visual { position: relative; min-height: 470px; }
+    .orb {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 390px; height: 390px;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(163, 78, 126, .23);
+      border-radius: 50%;
+      box-shadow: inset 0 0 90px rgba(222, 100, 145, .10), 0 0 90px rgba(137, 98, 176, .12);
+    }
+    .orb::before, .orb::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(140, 78, 142, .20);
+      border-radius: 50%;
+    }
+    .orb::before { inset: 48px -30px; transform: rotate(53deg); }
+    .orb::after { inset: -25px 66px; transform: rotate(-39deg); }
+    .node {
+      position: absolute;
+      width: var(--s); height: var(--s);
+      border-radius: 50%;
+      background: radial-gradient(circle at 33% 30%, #fff5f7 0 8%, #ef8aa5 34%, #bd4f78 72%);
+      box-shadow: 0 8px 35px rgba(194, 74, 117, .27);
+    }
+    .n1 { --s: 104px; left: 41%; top: 36%; }
+    .n2 { --s: 54px; left: 17%; top: 27%; }
+    .n3 { --s: 70px; right: 12%; top: 22%; }
+    .n4 { --s: 43px; left: 18%; bottom: 19%; }
+    .n5 { --s: 57px; right: 17%; bottom: 15%; }
+    .n3, .n5 { background: radial-gradient(circle at 33% 30%, #fbf7ff 0 8%, #b7a5dc 34%, #7a63a7 72%); }
+    .n6 { --s: 24px; right: 3%; top: 49%; background: var(--copper); }
+    .bond { position: absolute; height: 1px; background: rgba(123,82,133,.34); transform-origin: left center; }
+    .b1 { width: 158px; left: 25%; top: 35%; transform: rotate(16deg); }
+    .b2 { width: 150px; left: 50%; top: 42%; transform: rotate(-25deg); }
+    .b3 { width: 146px; left: 27%; top: 63%; transform: rotate(-30deg); }
+    .b4 { width: 138px; left: 52%; top: 54%; transform: rotate(39deg); }
+    .visual-label {
+      position: absolute;
+      right: 0; bottom: 30px;
+      padding: 12px 16px;
+      border: 1px solid rgba(79,48,82,.13);
+      border-radius: 12px;
+      background: rgba(255, 250, 250, .62);
+      backdrop-filter: blur(8px);
+      color: rgba(67,45,70,.72);
+      font-size: 12px;
+      letter-spacing: .05em;
+    }
+
+    .intro {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 100px 0 88px;
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 90px;
+      align-items: start;
+    }
+    .section-tag { color: var(--teal-deep); font-size: 12px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+    h2 {
+      margin: 12px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 4vw, 53px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+    .intro-copy { padding-top: 17px; }
+    .intro-copy p { margin: 0; color: var(--ink-soft); font-size: 18px; line-height: 1.85; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 27px;
+      color: var(--teal-deep);
+      font-size: 14px;
+      font-weight: 750;
+      border-bottom: 1px solid rgba(166,66,100,.35);
+      padding-bottom: 3px;
+    }
+
+    .research { background: var(--warm); padding: 90px 0 105px; }
+    .research-inner { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .section-head { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 42px; }
+    .section-head p { max-width: 390px; margin: 0 0 7px; color: var(--ink-soft); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      position: relative;
+      min-height: 310px;
+      padding: 30px;
+      overflow: hidden;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .card-no { color: var(--copper); font: 18px Georgia, serif; }
+    .card h3 { margin: 65px 0 12px; font-family: Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1.15; }
+    .card p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+    .card-dot {
+      position: absolute; right: -48px; top: -52px;
+      width: 155px; height: 155px; border-radius: 50%;
+      background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.95), rgba(229,101,139,.22) 33%, rgba(145,113,190,.09) 68%);
+    }
+
+    .news {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 94px 0 110px;
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 90px;
+    }
+    .news-list { border-top: 1px solid var(--line); }
+    .news-item { display: grid; grid-template-columns: 105px 1fr auto; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: center; }
+    .date { color: var(--teal-deep); font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .news-item h3 { margin: 0; font-family: Georgia, serif; font-size: 21px; font-weight: 400; line-height: 1.3; }
+    .news-item span:last-child { color: var(--copper); font-size: 22px; }
+
+    .join { background: linear-gradient(125deg, #49354e, #754764); color: white; }
+    .join-inner { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 80px 0; display: flex; justify-content: space-between; gap: 35px; align-items: center; }
+    .join h2 { margin-top: 8px; max-width: 710px; }
+    .join .section-tag { color: #f6b6c7; }
+    .join .button-primary { background: #f4a0b8; color: #432f47; }
+
+    footer { background: #302535; color: rgba(255,255,255,.64); }
+    .footer-inner { width: min(1180px, calc(100% - 48px)); margin: 0 auto; min-height: 90px; display: flex; justify-content: space-between; align-items: center; gap: 25px; font-size: 12px; }
+
+    /* Interactive palette comparison */
+    body[data-theme="navy"] {
+      --ink: #1c2e47; --ink-soft: #64707a; --teal: #294762; --teal-deep: #1d3855;
+      --warm: #e8eaec; --paper: #f3f4f4; --copper: #b28f62; --line: rgba(28,46,71,.14);
+      --hero-a: #f3f4f4; --hero-b: #e1e4e6; --hero-c: #eee8dc;
+      --glow-a: rgba(178,143,98,.23); --glow-b: rgba(41,71,98,.18); --glow-c: rgba(210,196,173,.20);
+      --node-a: #73879a; --node-b: #294762; --node-c: #c1a57d;
+      --join-a: #152942; --join-b: #27445f; --footer: #102137;
+    }
+    body[data-theme="coastal"] {
+      --ink: #15384c; --ink-soft: #58727e; --teal: #15a2b8; --teal-deep: #087b91;
+      --warm: #edf7f6; --paper: #fbfdfc; --copper: #f2aa3d; --line: rgba(21,56,76,.13);
+      --hero-a: #fbfdfc; --hero-b: #dff4f1; --hero-c: #e4eefb;
+      --glow-a: rgba(21,162,184,.28); --glow-b: rgba(238,111,94,.20); --glow-c: rgba(242,170,61,.18);
+      --node-a: #53c2ca; --node-b: #087b91; --node-c: #ee7767;
+      --join-a: #15384c; --join-b: #087488; --footer: #0d3042;
+    }
+    body[data-theme="sage"] {
+      --ink: #35423c; --ink-soft: #69766f; --teal: #728f78; --teal-deep: #526e5a;
+      --warm: #f4f6f0; --paper: #fffdf8; --copper: #c88a3c; --line: rgba(53,66,60,.13);
+      --hero-a: #fffdf8; --hero-b: #eef3e8; --hero-c: #f4eedf;
+      --glow-a: rgba(112,150,121,.24); --glow-b: rgba(173,148,86,.17); --glow-c: rgba(204,135,60,.13);
+      --node-a: #91ad92; --node-b: #58785f; --node-c: #d0ae68;
+      --join-a: #34483d; --join-b: #60745f; --footer: #29372f;
+    }
+    body[data-theme="trio"] {
+      --ink: #1f304f; --ink-soft: #667080; --teal: #8879b5; --teal-deep: #665791;
+      --warm: #e5e7ea; --paper: #f2f3f5; --copper: #c77690; --line: rgba(31,48,79,.14);
+      --hero-a: #f2f3f5; --hero-b: #e2e4e8; --hero-c: #e9e5f0;
+      --glow-a: rgba(136,121,181,.25); --glow-b: rgba(31,48,79,.18); --glow-c: rgba(199,118,144,.16);
+      --node-a: #a69bc9; --node-b: #665791; --node-c: #c77690;
+      --join-a: #1b2c49; --join-b: #343d61; --footer: #15243d;
+    }
+
+    body[data-theme] .hero {
+      background:
+        radial-gradient(circle at 83% 30%, var(--glow-a), transparent 29%),
+        radial-gradient(circle at 72% 77%, var(--glow-b), transparent 30%),
+        radial-gradient(circle at 19% 86%, var(--glow-c), transparent 25%),
+        linear-gradient(128deg, var(--hero-a) 0%, var(--hero-b) 54%, var(--hero-c) 100%);
+    }
+    body[data-theme] .site-header { color: var(--ink); }
+    body[data-theme] .nav { border-color: color-mix(in srgb, var(--ink) 14%, transparent); }
+    body[data-theme] .brand-mark, body[data-theme] .nav-cta { border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
+    body[data-theme] .brand small { color: color-mix(in srgb, var(--ink) 62%, transparent); }
+    body[data-theme] .nav-links a { color: color-mix(in srgb, var(--ink) 74%, transparent); }
+    body[data-theme] .nav-links a:hover, body[data-theme] .nav-cta { color: var(--ink) !important; }
+    body[data-theme] .eyebrow { color: var(--teal-deep); }
+    body[data-theme] .button-primary { background: var(--teal); color: white; box-shadow: 0 10px 28px color-mix(in srgb, var(--teal) 28%, transparent); }
+    body[data-theme] .button-secondary { border-color: color-mix(in srgb, var(--ink) 24%, transparent); color: var(--ink); }
+    body[data-theme] .node { background: radial-gradient(circle at 33% 30%, #fff 0 8%, var(--node-a) 34%, var(--node-b) 72%); box-shadow: 0 8px 35px color-mix(in srgb, var(--node-b) 28%, transparent); }
+    body[data-theme] .n3, body[data-theme] .n5 { background: radial-gradient(circle at 33% 30%, #fff 0 8%, color-mix(in srgb, var(--node-c) 65%, white) 34%, var(--node-c) 72%); }
+    body[data-theme] .n6 { background: var(--copper); }
+    body[data-theme] .orb, body[data-theme] .orb::before, body[data-theme] .orb::after { border-color: color-mix(in srgb, var(--teal) 24%, transparent); }
+    body[data-theme] .bond { background: color-mix(in srgb, var(--teal-deep) 35%, transparent); }
+    body[data-theme] .visual-label { border-color: color-mix(in srgb, var(--ink) 14%, transparent); color: var(--ink-soft); }
+    body[data-theme] .brand-mark svg circle[fill] { fill: var(--teal); }
+    body[data-theme] .text-link { border-color: color-mix(in srgb, var(--teal-deep) 35%, transparent); }
+    body[data-theme] .card-dot { background: radial-gradient(circle at 34% 30%, #fff, color-mix(in srgb, var(--teal) 22%, transparent) 36%, color-mix(in srgb, var(--node-c) 10%, transparent) 68%); }
+    body[data-theme] .join { background: linear-gradient(125deg, var(--join-a), var(--join-b)); }
+    body[data-theme] .join .section-tag { color: color-mix(in srgb, var(--teal) 35%, white); }
+    body[data-theme] .join .button-primary { background: color-mix(in srgb, var(--teal) 40%, white); color: var(--join-a); }
+    body[data-theme="navy"] .join .button-primary { background: #d2c0a4; color: #152942; }
+    body[data-theme="coastal"] .hero::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2315a2b8' stroke-opacity='.25'%3E%3Ccircle cx='14' cy='32' r='2' fill='%23ee7767'/%3E%3Ccircle cx='90' cy='20' r='1.5' fill='%23f2aa3d'/%3E%3Ccircle cx='124' cy='92' r='2' fill='%23ee7767'/%3E%3Ccircle cx='48' cy='126' r='1.5' fill='%23f2aa3d'/%3E%3Cpath d='M14 32L90 20M90 20l34 72M124 92l-76 34M48 126L14 32'/%3E%3C/g%3E%3C/svg%3E"); }
+    body[data-theme="coastal"] .join .button-primary { background: #f4b052; color: #15384c; }
+    body[data-theme="trio"] .hero {
+      color: white;
+      background:
+        radial-gradient(circle at 82% 30%, rgba(199,118,144,.32), transparent 29%),
+        radial-gradient(circle at 69% 79%, rgba(136,121,181,.24), transparent 31%),
+        linear-gradient(128deg, #14243d 0%, #1f304f 56%, #2c3e61 100%);
+    }
+    body[data-theme="trio"] .hero::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23a396c7' stroke-opacity='.28'%3E%3Ccircle cx='14' cy='32' r='2' fill='%23c77690'/%3E%3Ccircle cx='90' cy='20' r='1.5' fill='%23e2e4e8'/%3E%3Ccircle cx='124' cy='92' r='2' fill='%23c77690'/%3E%3Ccircle cx='48' cy='126' r='1.5' fill='%23e2e4e8'/%3E%3Cpath d='M14 32L90 20M90 20l34 72M124 92l-76 34M48 126L14 32'/%3E%3C/g%3E%3C/svg%3E"); }
+    body[data-theme="trio"] .site-header { color: white; }
+    body[data-theme="trio"] .nav { border-color: rgba(255,255,255,.18); }
+    body[data-theme="trio"] .brand-mark, body[data-theme="trio"] .nav-cta { border-color: rgba(255,255,255,.38); }
+    body[data-theme="trio"] .brand small { color: rgba(255,255,255,.66); }
+    body[data-theme="trio"] .nav-links a { color: rgba(255,255,255,.78); }
+    body[data-theme="trio"] .nav-links a:hover, body[data-theme="trio"] .nav-cta { color: white !important; }
+    body[data-theme="trio"] .eyebrow { color: #dc92a9; }
+    body[data-theme="trio"] .hero-copy p { color: rgba(255,255,255,.74); }
+    body[data-theme="trio"] .hero .button-primary { background: #c77690; color: white; }
+    body[data-theme="trio"] .hero .button-secondary { border-color: rgba(255,255,255,.32); color: white; background: rgba(255,255,255,.06); }
+    body[data-theme="trio"] .visual-label { color: rgba(255,255,255,.76); border-color: rgba(255,255,255,.18); background: rgba(17,32,54,.45); }
+    body[data-theme="trio"] .join { color: #1f304f; background: linear-gradient(125deg, #aa9dca, #8879b5); }
+    body[data-theme="trio"] .join .section-tag { color: #1f304f; }
+    body[data-theme="trio"] .join .button-primary { background: #1f304f; color: white; }
+    body[data-theme] footer { background: var(--footer); }
+
+    .theme-picker {
+      position: fixed; z-index: 30; right: 20px; bottom: 20px;
+      width: 300px; padding: 14px 15px 13px;
+      border: 1px solid rgba(45,39,54,.13); border-radius: 17px;
+      background: rgba(255,255,255,.88); box-shadow: 0 13px 40px rgba(48,38,60,.16);
+      backdrop-filter: blur(13px);
+    }
+    .theme-picker strong { display: block; margin-bottom: 9px; color: #393241; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .theme-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .theme-option { padding: 7px 4px 6px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: #6e6571; cursor: pointer; font-size: 10px; }
+    .theme-option:hover, .theme-option[aria-pressed="true"] { border-color: rgba(57,50,65,.18); background: white; color: #312b37; }
+    .swatches { display: flex; justify-content: center; margin-bottom: 5px; }
+    .swatches i { width: 15px; height: 15px; margin-left: -3px; border: 2px solid white; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+    .swatches i:first-child { margin-left: 0; }
+    .navy i:nth-child(1) { background:#1c2e47; } .navy i:nth-child(2) { background:#b28f62; } .navy i:nth-child(3) { background:#e1e4e6; }
+    .coastal i:nth-child(1) { background:#15a2b8; } .coastal i:nth-child(2) { background:#ee7767; } .coastal i:nth-child(3) { background:#f2aa3d; }
+    .sage i:nth-child(1) { background:#728f78; } .sage i:nth-child(2) { background:#d0ae68; } .sage i:nth-child(3) { background:#f1e7cd; }
+    .trio i:nth-child(1) { background:#1f304f; } .trio i:nth-child(2) { background:#8879b5; } .trio i:nth-child(3) { background:#e2e4e8; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 160px 0 80px; }
+      .nano-visual { min-height: 360px; }
+      .orb { width: 310px; height: 310px; }
+      .hero { min-height: auto; }
+      .intro, .news { grid-template-columns: 1fr; gap: 35px; }
+      .cards { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .nav, .hero-inner, .intro, .research-inner, .news, .join-inner, .footer-inner { width: min(100% - 30px, 1180px); }
+      .brand { font-size: 13px; }
+      .brand small { font-size: 8px; }
+      h1 { font-size: 49px; }
+      .hero-copy p { font-size: 16px; }
+      .nano-visual { transform: scale(.86); margin: -20px; }
+      .intro, .news { padding: 70px 0; }
+      .research { padding: 70px 0; }
+      .join-inner { align-items: flex-start; flex-direction: column; }
+      .news-item { grid-template-columns: 1fr auto; }
+      .news-item .date { grid-column: 1 / -1; }
+      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 25px 0; }
+      .theme-picker { right: 10px; bottom: 10px; width: 285px; }
+    }
+  </style>
+</head>
+<body data-theme="trio">
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="3" stroke="currentColor"/><circle cx="16.5" cy="6" r="2" fill="#d95f7f"/><circle cx="16" cy="16" r="3.5" stroke="currentColor"/><path d="M9.7 7.4l4.8-.9M9.1 10.1l4.6 3.6" stroke="currentColor"/></svg>
+        </span>
+        <span>Ustuner Lab<small>Advanced Materials for Energy Systems Laboratory</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#people">People</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a class="nav-cta" href="#contact">Join the group</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">Materials at the smallest scale</div>
+          <h1>Small structures.<br />Transformative ideas.</h1>
+          <p>We design and investigate nanostructured materials to understand how structure, interfaces, and chemistry shape performance in energy and environmental applications.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#research">Explore our research <span class="arrow">→</span></a>
+            <a class="button button-secondary" href="#people">Meet the team</a>
+          </div>
+        </div>
+        <div class="nano-visual" aria-label="Abstract illustration of a nanostructured material">
+          <div class="orb"></div>
+          <div class="bond b1"></div><div class="bond b2"></div><div class="bond b3"></div><div class="bond b4"></div>
+          <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div>
+          <div class="node n4"></div><div class="node n5"></div><div class="node n6"></div>
+          <div class="visual-label">STRUCTURE · INTERFACES · PERFORMANCE</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro" id="people">
+      <div>
+        <div class="section-tag">Our perspective</div>
+        <h2>Connecting nanoscale insight to real-world challenges.</h2>
+      </div>
+      <div class="intro-copy">
+        <p>Our group brings together materials synthesis, advanced characterization, and electrochemistry. We ask fundamental questions about how materials behave—and use the answers to create more durable, efficient, and sustainable technologies.</p>
+        <a class="text-link" href="#">Learn about our group <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="research" id="research">
+      <div class="research-inner">
+        <div class="section-head">
+          <div><div class="section-tag">Research themes</div><h2>What we investigate</h2></div>
+          <p>Three connected directions, united by a focus on materials, interfaces, and electrochemical behavior.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="card-dot"></div><div class="card-no">01</div><h3>Nanostructured Materials</h3><p>Designing composition, morphology, and architecture to unlock new material behavior.</p></article>
+          <article class="card"><div class="card-dot"></div><div class="card-no">02</div><h3>Electrochemical Interfaces</h3><p>Understanding how local environments govern transport, reactivity, and selectivity.</p></article>
+          <article class="card"><div class="card-dot"></div><div class="card-no">03</div><h3>Durability &amp; Corrosion</h3><p>Developing materials strategies for resilient energy and thermal-management systems.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="news" id="news">
+      <div><div class="section-tag">From the group</div><h2>Recent news &amp; highlights</h2></div>
+      <div class="news-list">
+        <a class="news-item" href="#"><span class="date">October 2026</span><h3>Our students present new research at the annual conference</h3><span>↗</span></a>
+        <a class="news-item" href="#"><span class="date">September 2026</span><h3>Welcome to the newest members of our research team</h3><span>↗</span></a>
+        <a class="news-item" href="#"><span class="date">August 2026</span><h3>New project explores interfaces in nanostructured coatings</h3><span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="join" id="contact">
+      <div class="join-inner">
+        <div><div class="section-tag">Work with us</div><h2>Curious about nanomaterials? Let’s explore together.</h2></div>
+        <a class="button button-primary" href="mailto:your.email@university.edu">Opportunities <span class="arrow">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="footer-inner"><span>© 2026 Ustuner Lab</span><span>Advanced Materials for Energy Systems Laboratory</span></div></footer>
+</body>
+</html>
