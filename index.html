@@ -217,6 +217,18 @@
       gap: 90px;
       align-items: start;
     }
+    .people-profile { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+    .people-photo {
+      display: block;
+      width: min(100%, 300px);
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: center 35%;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .people-profile h2 { margin-top: 10px; }
+    .people-affiliation { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
     .section-tag { color: var(--teal-deep); font-size: 12px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
     h2 {
       margin: 12px 0 0;
@@ -465,9 +477,13 @@
     </section>
 
     <section class="intro" id="people">
-      <div>
-        <div class="section-tag">Our perspective</div>
-        <h2>Connecting nanoscale insight to real-world challenges.</h2>
+      <div class="people-profile">
+        <img class="people-photo" src="images/ustuner-lab-profile.png" alt="Portrait of the assistant professor" />
+        <div>
+          <div class="section-tag">People</div>
+          <h2>Assistant Professor</h2>
+          <p class="people-affiliation">Department of Engineering<br />Hofstra University</p>
+        </div>
       </div>
       <div class="intro-copy">
         <p>Our group brings together materials synthesis, advanced characterization, and electrochemistry. We ask fundamental questions about how materials behave—and use the answers to create more durable, efficient, and sustainable technologies.</p>
