@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait photo placeholder</title>
+  <desc id="desc">Photo will be added soon</desc>
+  <rect width="480" height="600" fill="#e8e4ec"/>
+  <circle cx="240" cy="205" r="92" fill="#c8bfd1"/>
+  <path d="M72 600c12-128 79-194 168-194s156 66 168 194" fill="#c8bfd1"/>
+  <text x="240" y="548" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" fill="#5d5267">Photo coming soon</text>
+</svg>
