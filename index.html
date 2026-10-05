@@ -418,6 +418,50 @@
     body[data-theme="trio"] .join .button-primary { background: #1f304f; color: white; }
     body[data-theme] footer { background: var(--footer); }
 
+    /* Deep sea and lilac palette from the selected reference design. */
+    body[data-theme="deepsea-lilac"] {
+      --ink:#123b4d; --ink-soft:#5b7580; --teal:#2b9ca5; --teal-deep:#0e6872;
+      --warm:#eef5f6; --paper:#fbfeff; --copper:#9b5364; --line:rgba(18,59,77,.14);
+      --hero-a:#e7fbfc; --hero-b:#dcebf8; --hero-c:#f1eafa;
+      --glow-a:rgba(69,198,195,.25); --glow-b:rgba(164,139,214,.22); --glow-c:rgba(245,198,92,.16);
+      --node-a:#68c9c6; --node-b:#176a7a; --node-c:#a48bd6;
+      --join-a:#0d4055; --join-b:#5d5690; --footer:#0b3444;
+      --dusty-rose:#9b5364;
+    }
+    body[data-theme="deepsea-lilac"] .hero-copy p { color:#456a77; }
+    body[data-theme="deepsea-lilac"] .hero h1 span { font-weight:700; }
+    body[data-theme="deepsea-lilac"] .small-structures { color:#123b4d; }
+    body[data-theme="deepsea-lilac"] .transformative { color:var(--dusty-rose); }
+    body[data-theme="deepsea-lilac"] .visual-label { background:rgba(251,254,255,.76); }
+    body[data-theme="deepsea-lilac"] .faculty-feature { background:linear-gradient(120deg,rgba(255,255,255,.96),rgba(231,251,252,.75)); }
+    body[data-theme="deepsea-lilac"] .student-group-heading { align-items:flex-start; justify-content:flex-start; flex-direction:column; text-align:left; }
+    body[data-theme="deepsea-lilac"] .student-group-heading .section-tag,
+    body[data-theme="deepsea-lilac"] .student-group-heading h3 { width:100%; text-align:left; }
+
+    .reference-atom { position:absolute; left:50%; top:48%; width:min(395px,100%); aspect-ratio:1; transform:translate(-50%,-50%); filter:drop-shadow(0 18px 24px rgba(18,59,77,.14)); }
+    .reference-orbit { position:absolute; left:50%; top:50%; width:87.3%; height:33.4%; transform-origin:center; border:2px solid rgba(47,85,98,.7); border-radius:50%; }
+    .reference-orbit-a { transform:translate(-50%,-50%) rotate(15deg); animation:reference-orbit-a 13s linear infinite; }
+    .reference-orbit-b { transform:translate(-50%,-50%) rotate(77deg); animation:reference-orbit-b 16s linear infinite; }
+    .reference-orbit-c { transform:translate(-50%,-50%) rotate(-46deg); animation:reference-orbit-c 19s linear infinite; }
+    .reference-electron { position:absolute; width:29px; height:29px; right:-15px; top:calc(50% - 15px); border-radius:50%; background:radial-gradient(circle at 31% 26%,#f5ffff 0 9%,#7b8990 34%,#263f4d 76%); box-shadow:0 2px 12px rgba(18,59,77,.35); }
+    .reference-orbit-b .reference-electron { right:auto; left:8px; top:16px; }
+    .reference-orbit-c .reference-electron { right:auto; left:42px; bottom:1px; top:auto; }
+    .reference-nucleus { position:absolute; left:50%; top:50%; z-index:3; width:112px; height:112px; transform:translate(-50%,-50%); border-radius:50%; background:rgba(255,255,255,.13); box-shadow:0 0 28px rgba(164,139,214,.35); }
+    .reference-nucleon { position:absolute; width:36px; height:36px; border-radius:50%; background:radial-gradient(circle at 31% 26%,#fff5fb 0 8%,#c77d9a 38%,#85516f 78%); box-shadow:0 3px 12px rgba(18,59,77,.2); }
+    .reference-nucleon:nth-child(2n) { background:radial-gradient(circle at 31% 26%,#efffff 0 8%,#68c9c6 38%,#176a7a 78%); }
+    .reference-nucleon:nth-child(1) { left:38px; top:4px; }
+    .reference-nucleon:nth-child(2) { left:15px; top:23px; }
+    .reference-nucleon:nth-child(3) { left:61px; top:23px; }
+    .reference-nucleon:nth-child(4) { left:38px; top:34px; }
+    .reference-nucleon:nth-child(5) { left:3px; top:49px; }
+    .reference-nucleon:nth-child(6) { left:73px; top:49px; }
+    .reference-nucleon:nth-child(7) { left:20px; top:68px; }
+    .reference-nucleon:nth-child(8) { left:56px; top:68px; }
+    @keyframes reference-orbit-a { from { transform:translate(-50%,-50%) rotate(15deg); } to { transform:translate(-50%,-50%) rotate(375deg); } }
+    @keyframes reference-orbit-b { from { transform:translate(-50%,-50%) rotate(77deg); } to { transform:translate(-50%,-50%) rotate(-283deg); } }
+    @keyframes reference-orbit-c { from { transform:translate(-50%,-50%) rotate(-46deg); } to { transform:translate(-50%,-50%) rotate(314deg); } }
+    @media (prefers-reduced-motion:reduce) { .reference-orbit { animation:none; } }
+
     .theme-picker {
       position: fixed; z-index: 30; right: 20px; bottom: 20px;
       width: 300px; padding: 14px 15px 13px;
@@ -441,7 +485,6 @@
       .nav-links a:not(.nav-cta) { display: none; }
       .hero-inner { grid-template-columns: 1fr; padding: 160px 0 80px; }
       .nano-visual { min-height: 360px; }
-      .orb { width: 310px; height: 310px; }
       .hero { min-height: auto; }
       .people-heading, .news { grid-template-columns: 1fr; gap: 35px; }
       .faculty-feature { grid-template-columns: minmax(180px, 240px) 1fr; gap: 28px; }
@@ -473,7 +516,7 @@
     }
   </style>
 </head>
-<body data-theme="trio">
+<body data-theme="deepsea-lilac">
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#">
@@ -497,19 +540,24 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow">Materials at the smallest scale</div>
-          <h1>Small structures.<br />Transformative ideas.</h1>
+          <h1><span class="small-structures">Small structures.</span><br /><span class="transformative">Transformative ideas.</span></h1>
           <p>We design and investigate nanostructured materials to understand how structure, interfaces, and chemistry shape performance in energy and environmental applications.</p>
           <div class="actions">
             <a class="button button-primary" href="#research">Explore our research <span class="arrow">→</span></a>
             <a class="button button-secondary" href="#people">Meet the team</a>
           </div>
         </div>
-        <div class="nano-visual" aria-label="Abstract illustration of a nanostructured material">
-          <div class="orb"></div>
-          <div class="bond b1"></div><div class="bond b2"></div><div class="bond b3"></div><div class="bond b4"></div>
-          <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div>
-          <div class="node n4"></div><div class="node n5"></div><div class="node n6"></div>
-          <div class="visual-label">STRUCTURE · INTERFACES · PERFORMANCE</div>
+        <div class="nano-visual" aria-label="Animated three-orbit atom with electrons and a clustered nucleus">
+          <div class="reference-atom" aria-hidden="true">
+            <div class="reference-orbit reference-orbit-a"><i class="reference-electron"></i></div>
+            <div class="reference-orbit reference-orbit-b"><i class="reference-electron"></i></div>
+            <div class="reference-orbit reference-orbit-c"><i class="reference-electron"></i></div>
+            <div class="reference-nucleus">
+              <i class="reference-nucleon"></i><i class="reference-nucleon"></i><i class="reference-nucleon"></i><i class="reference-nucleon"></i>
+              <i class="reference-nucleon"></i><i class="reference-nucleon"></i><i class="reference-nucleon"></i><i class="reference-nucleon"></i>
+            </div>
+          </div>
+          <div class="visual-label">NANOSCALE · INTERFACES · ENERGY</div>
         </div>
       </div>
     </section>
@@ -536,38 +584,42 @@
       <section class="student-group" aria-labelledby="undergraduate-heading">
         <div class="student-group-heading"><div class="section-tag">Students</div><h3 id="undergraduate-heading">Undergraduate Researchers</h3></div>
         <div class="people-grid">
-          <a class="person-card" href="people/member-02.html" aria-label="View undergraduate student profile 1">
-            <img src="images/people/member-02.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 01</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-02.html" aria-label="View Jillian Singh-Smith's undergraduate profile">
+            <img src="images/people/member-02.jpg" alt="Portrait of Jillian Singh-Smith" loading="lazy" />
+            <div class="person-card-info"><h3>Jillian Singh-Smith</h3><p>B.S. Computer Science and Mathematics</p><span class="person-card-cta">View profile →</span></div>
           </a>
-          <a class="person-card" href="people/member-03.html" aria-label="View undergraduate student profile 2">
-            <img src="images/people/member-03.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 02</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-03.html" aria-label="View Elizabeth Eger's undergraduate profile">
+            <img src="images/people/member-03.jpg" alt="Portrait of Elizabeth Eger" loading="lazy" />
+            <div class="person-card-info"><h3>Elizabeth Eger</h3><p>2026 · B.S. Mechanical Engineering, Aerospace Concentration</p><span class="person-card-cta">View profile →</span></div>
           </a>
-          <a class="person-card" href="people/member-04.html" aria-label="View undergraduate student profile 3">
-            <img src="images/people/member-04.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 03</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-04.html" aria-label="View Geoffrey Gross's undergraduate profile">
+            <img src="images/people/member-04.jpg" alt="Portrait of Geoffrey Gross" loading="lazy" />
+            <div class="person-card-info"><h3>Geoffrey Gross</h3><p>B.S. Mechanical Engineering</p><span class="person-card-cta">View profile →</span></div>
           </a>
-          <a class="person-card" href="people/member-05.html" aria-label="View undergraduate student profile 4">
-            <img src="images/people/member-05.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 04</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-05.html" aria-label="View Emilia Szynwald's undergraduate profile">
+            <img src="images/people/member-05.jpg" alt="Portrait of Emilia Szynwald" loading="lazy" />
+            <div class="person-card-info"><h3>Emilia Szynwald</h3><p>B.S. Computer Science with Concentration in Artificial Intelligence</p><span class="person-card-cta">View profile →</span></div>
           </a>
-          <a class="person-card" href="people/member-06.html" aria-label="View undergraduate student profile 5">
-            <img src="images/people/member-06.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 05</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-06.html" aria-label="View Sajun Kavuri's undergraduate profile">
+            <img src="images/people/member-06.jpg" alt="Portrait of Sajun Kavuri" loading="lazy" />
+            <div class="person-card-info"><h3>Sajun Kavuri</h3><p>B.S. Computer Engineering with Concentration in Artificial Intelligence</p><span class="person-card-cta">View profile →</span></div>
           </a>
-          <a class="person-card" href="people/member-07.html" aria-label="View undergraduate student profile 6">
-            <img src="images/people/member-07.jpg" alt="Portrait of an undergraduate student" loading="lazy" />
-            <div class="person-card-info"><h3>Undergraduate 06</h3><p>Undergraduate student</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-07.html" aria-label="View Andrew Braun's undergraduate profile">
+            <img src="images/people/member-07.jpg" alt="Portrait of Andrew Braun" loading="lazy" />
+            <div class="person-card-info"><h3>Andrew Braun</h3><p>2026 · B.S. Mechanical Engineering</p><span class="person-card-cta">View profile →</span></div>
+          </a>
+          <a class="person-card" href="people/member-08.html" aria-label="View Drew Atkins's undergraduate profile">
+            <img src="images/people/photo-placeholder.svg" alt="Photo placeholder for Drew Atkins" loading="lazy" />
+            <div class="person-card-info"><h3>Drew Atkins</h3><p>2026 · B.S. Mechanical Engineering and Physics</p><span class="person-card-cta">View profile →</span></div>
           </a>
         </div>
       </section>
       <section class="student-group high-school-group" aria-labelledby="high-school-heading">
         <div class="student-group-heading"><div class="section-tag">Students</div><h3 id="high-school-heading">High School Students</h3></div>
         <div class="people-grid">
-          <a class="person-card" href="people/member-01.html" aria-label="View high school student profile">
-            <img src="images/people/photo-placeholder.svg" alt="Photo placeholder for the high school student" loading="lazy" />
-            <div class="person-card-info"><h3>High School Student</h3><p>Photo and profile details coming soon</p><span class="person-card-cta">View profile →</span></div>
+          <a class="person-card" href="people/member-01.html" aria-label="View Fei Shi's high school profile">
+            <img src="images/people/photo-placeholder.svg" alt="Photo placeholder for Fei Shi Zhong" loading="lazy" />
+            <div class="person-card-info"><h3>Fei Shi Zhong</h3><p>Miller Place High School · Environmental Science major, Biochemistry minor</p><span class="person-card-cta">View profile →</span></div>
           </a>
         </div>
       </section>
